@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "b11d0887-b161-45d1-821a-7b28d37ffdba",
+		"name": "Test API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "recuperar marcas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5dc5f885-1838-4734-92f5-8b2e8520bf47",
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.environment.set(\"Id_marca\", pm.response.json()[1].ID);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "http://desafioonline.webmotors.com.br/api/OnlineChallenge/Make",
+					"protocol": "http",
+					"host": [
+						"desafioonline",
+						"webmotors",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"OnlineChallenge",
+						"Make"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "recuperar modelos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e7acc1e8-c8c4-45b3-b990-0044f8ebce28",
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.environment.set(\"Id_modelo\", pm.response.json()[0].ID);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://desafioonline.webmotors.com.br/api/OnlineChallenge/Model?MakeID={{Id_marca}}",
+					"protocol": "http",
+					"host": [
+						"desafioonline",
+						"webmotors",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"OnlineChallenge",
+						"Model"
+					],
+					"query": [
+						{
+							"key": "MakeID",
+							"value": "{{Id_marca}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "recuperar versões",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4eebc784-9d58-40d7-b79d-d3907880368b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://desafioonline.webmotors.com.br/api/OnlineChallenge/Version?ModelID={{Id_modelo}}",
+					"protocol": "http",
+					"host": [
+						"desafioonline",
+						"webmotors",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"OnlineChallenge",
+						"Version"
+					],
+					"query": [
+						{
+							"key": "ModelID",
+							"value": "{{Id_modelo}}"
+						}
+					]
+				},
+				"description": "\r\nEste recurso tem o objetivo incluir uma nova proposta baseado na simulação."
+			},
+			"response": []
+		},
+		{
+			"name": "versões",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d28b07c7-ca50-432b-b89c-56e1001ca036",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cpf\": \"{{cpf}}\",\r\n  \"cnpj\": \"\",\r\n  \"nomeCliente\": \"{{nome}}\",\r\n  \"dataNascimento\": \"1980-03-21\",\r\n  \"sexo\": \"M\",\r\n  \"numeroDocIdentidade\": \"123456\",\r\n  \"tipoDocIdentidade\": \"01\",\r\n  \"ufDocIdentidade\": \"SP\",\r\n  \"orgaoEmissorDocIdentidade\": \"01\",\r\n  \"dataEmissaoDocIdentidade\": \"2014-06-17\",\r\n  \"nomeMae\": \"CLAUDIA SOARES\",\r\n  \"nomePai\": \"FRANSCISCO DA SILVA\",\r\n  \"enderecoEmail\": \"meuemail@gmail.com\",\r\n  \"ppe\": false,\r\n  \"dataPPE\": \"\",\r\n  \"ufNascimento\": \"SP\",\r\n  \"naturalidade\": \"OSASCO\",\r\n  \"nacionalidade\": \"BR\",\r\n  \"estadoCivil\": \"A\",\r\n  \"grauInstrucao\": \"4\",\r\n  \"cepResidencial\": \"05576100\",\r\n  \"enderecoResidencial\": \"RUA DOLIVAL DE MORAES\",\r\n  \"numeroResidencial\": \"43\",\r\n  \"complementoResidencial\": \"CASA\",\r\n  \"bairroResidencial\": \"JARDIM SANTA ROSA\",\r\n  \"cidadeResidencial\": \"TABOÃO DA SERRA\",\r\n  \"ufResidencial\": \"SP\",\r\n  \"resideDesde\": \"06/2008\",\r\n  \"tipoResidencia\": \"1\",\r\n  \"nomeEmpresaAtividade\": \"EMPRESA XPTO\",\r\n  \"cnpjEmpresaAtividade\": \"95437030000176\",\r\n  \"cepComercial\": \"13090504\",\r\n  \"enderecoComercial\": \"RUA DOIS\",\r\n  \"bairroComercial\": \"LIBERDADE\",\r\n  \"cidadeComercial\": \"EMBU\",\r\n  \"ufComercial\": \"SP\",\r\n  \"tipoAtividade\": \"0002\",\r\n  \"dataAdmissaoEmpresaAtividade\": \"2009-04-19\",\r\n  \"profissaoAtividade\": \"0002\",\r\n  \"cargoAtividade\": \"EMPRESARIO\",\r\n  \"funcionarioConvenio\": false,\r\n  \"numeroMatriculaBeneficio\": \"\",\r\n  \"convenio\": \"\",\r\n  \"convenioOrgao\": \"\",\r\n  \"rendaMensalAtividade\": 8000,\r\n  \"rendaMensalOutras\": 0,\r\n  \"socioProprietarioEmpresa\": true,\r\n  \"percentualParticipacaoEmpresa\": 50,\r\n  \"cpfConjuge\": \"91369198027\",\r\n  \"nomeConjuge\": \"MARIANA DOS SANTOS\",\r\n  \"dataNascimentoConjuge\": \"2000-06-19\",\r\n  \"nomeEmpresaAtividadeConjuge\": \"\",\r\n  \"cepComercialConjuge\": \"\",\r\n  \"enderecoComercialConjuge\": \"\",\r\n  \"bairroComercialConjuge\": \"\",\r\n  \"cidadeComercialConjuge\": \"\",\r\n  \"ufComercialConjugeConjuge\": \"\",\r\n  \"dddFoneComercialConjuge\": \"\",\r\n  \"foneComercialConjuge\": \"\",\r\n  \"ramalFoneComercialConjuge\": \"\",\r\n  \"dataAdmissaoEmpresaAtividadeConjuge\": \"\",\r\n  \"profissaoAtividadeConjuge\": \"\",\r\n  \"rendaMensalAtividadeConjuge\": 0,\r\n  \"listReferenciasPessoais\": [\r\n    {\r\n      \"nomeReferenciaPessoal\": \"LAURA\",\r\n      \"relacReferenciaPessoal\": \"PRIMA\",\r\n      \"dddReferenciaPessoal\": \"11\",\r\n      \"foneReferenciaPessoal\": \"43211234\"\r\n    }\r\n  ],\r\n  \"listReferenciasBancarias\": [\r\n    {\r\n      \"referenciaBancariaBanco\": \"0001\",\r\n      \"referenciaBancariaAgencia\": \"1234\",\r\n      \"referenciaBancariaDigitoAgencia\": \"5\",\r\n      \"referenciaBancariaConta\": \"123456\",\r\n      \"referenciaBancariaDigitoConta\": \"7\",\r\n      \"referenciaBancariaCidade\": \"OSASCO\",\r\n      \"referenciaBancariaUF\": \"SP\",\r\n      \"referenciaBancariaContaDesde\": \"\"\r\n    }\r\n  ],\r\n    \"listTelefones\": [\r\n    {\r\n      \"tipo\": \"1\",\r\n      \"ddd\": \"11\",\r\n      \"numero\": \"999465589\",\r\n      \"ramal\": \"0\"\r\n    }\r\n  ],\r\n  \"codigoExterno\": \"814209750\",\r\n  \"cosif\": \"4600\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://desafioonline.webmotors.com.br/api/OnlineChallenge/Vehicles?Page=1",
+					"protocol": "http",
+					"host": [
+						"desafioonline",
+						"webmotors",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"OnlineChallenge",
+						"Vehicles"
+					],
+					"query": [
+						{
+							"key": "Page",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Este recurso tem o objetivo registrar os dados do cliente na proposta."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
